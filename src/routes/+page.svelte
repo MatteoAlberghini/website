@@ -1,8 +1,8 @@
 <!-- script -->
 <script>
   import Desktop from '../ui/macro/desktop.svelte'
-  import FolderDesktop from '../ui/components/folder.desktop.svelte'
-  import NotepadDesktop from '../ui/components/notepad.desktop.svelte'
+  import FolderDesktop from '../ui/components/desktop/folder.desktop.svelte'
+  import NotepadDesktop from '../ui/components/desktop/notepad.desktop.svelte'
   import Settings from '../ui/micro/settings.svelte'
 </script>
 

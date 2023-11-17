@@ -1,9 +1,10 @@
 <!-- script -->
 <script>
-  import QuitButton from '../components/quit.button.svelte'
-  import ScreenSaverButton from '../components/saver.button.svelte'
-  import PCDesktop from '../components/pc.desktop.svelte'
-  import ThemeSelector from '../components/theme.selector.svelte'
+  import QuitButton from '../components/buttons/quit.button.svelte'
+  import ScreenSaverButton from '../components/buttons/saver.button.svelte'
+  import PCDesktop from '../components/desktop/pc.desktop.svelte'
+  import ThemeSelector from '../components/selectors/theme.selector.svelte'
+  import ScreenSelector from '../components/selectors/screen.selector.svelte'
 </script>
 
 <!-- template -->
@@ -24,8 +25,9 @@
   <div class="content">
     <!-- color theme -->
     <div class="option-wrapper">
-      <span class="option-title">COLOR THEME</span>
+      <span class="option-title">THEME</span>
       <ThemeSelector />
+      <ScreenSelector />
     </div>
     <!-- icons -->
     <div class="option-wrapper">
@@ -63,16 +65,19 @@
   .option-wrapper {
     /* flex */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
+    flex-direction: column;
     /* border */
     border: 1px solid var(--color-background);
+    border-bottom-width: 3px;
     /* size */
     width: 345px;
-    min-height: 120px;
+    min-height: 155px;
     /* margins */
     margin-top: 12px;
     padding-top: 8px;
+    padding-bottom: 26px;
     /* position */
     position: relative;
   }
@@ -91,6 +96,7 @@
     /* margins */
     padding-left: 8px;
     padding-right: 8px;
+    margin-left: 2px;
   }
   .power-buttons-wrapper {
     /* flex */

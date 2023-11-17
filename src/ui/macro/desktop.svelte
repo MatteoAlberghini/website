@@ -1,5 +1,31 @@
+<!-- script -->
+<script lang="ts">
+  /* imports */
+  import FishScreen from '../components/screens/fish.screen.svelte'
+  import { isScreenPlaying, currentScreen } from '../../stores/screen.store'
+  import { onMount } from 'svelte'
+  import { getScreen } from '../../support/cookies'
+  import PlanetScreen from '../components/screens/planet.screen.svelte'
+
+  /* stores */
+  $: screenPlaying = $isScreenPlaying
+  $: screen = $currentScreen
+  onMount(() => { currentScreen.set(getScreen().value) })
+  /* functions */
+  function disableScreen() { isScreenPlaying.set(false) }
+</script>
+
 <!-- template -->
 <section>
+  <!-- all screensavers -->
+  {#if screenPlaying === true}
+    {#if screen === 'fish'}
+      <FishScreen on:disableScreen={disableScreen} />
+    {:else if screen === 'planet'}
+      <PlanetScreen on:disableScreen={disableScreen} />
+    {/if}
+  {/if}
+  <!-- content -->
   <div class="grain" />
   <div class="content-container">
     <slot />

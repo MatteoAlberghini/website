@@ -13,35 +13,33 @@
 <!-- style -->
 <style>
   /* global */
-  :root {
+  :root { /* todo streamline colors better */
     /* colors theme */
     --color-background: #B682FF;
-    --color-background-secondary: #312454;
-    --color-background-secondary-opacity: #31245430;
     --color-highlight: #FFD200;
-    --color-highlight-opacity: #FFD20030;
-    --color-white: #F2F2F2;
+    --color-highlight-hover: #FFD20030;
+    /* defaults */
+    --color-white: #FFF4E9;
     --color-black: #27213C;
-    --color-button: #ede06d;
-    --color-button-bg: #ffb003;
     /* color specific */
     --color-neon-yellow: #FFD200;
     --color-neon-blue: #0FD2FF;
     --color-neon-violet: #F60099;
   }
   [data-theme='yellow']:root {
-    --color-button: #ede06d;
-    --color-button-bg: #ffb003;
     --color-background: #DACE62;
     --color-highlight: #ffb003;
-    --color-highlight-opacity: #ffb00360;
+    --color-highlight-hover: #ffb00360;
   }
   [data-theme='violet']:root {
-    --color-button: #B682FF;
-    --color-button-bg: #FFD200;
     --color-background: #B682FF;
     --color-highlight: #FFD200;
-    --color-highlight-opacity: #FFD20030;
+    --color-highlight-hover: #FFD20030;
+  }
+  [data-theme='light']:root {
+    --color-background: #FFF4E9;
+    --color-highlight: #BF354b;
+    --color-highlight-hover: #BF354b30;
   }
   :global(body) {
     /* size */

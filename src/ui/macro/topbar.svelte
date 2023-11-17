@@ -16,7 +16,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2147483647;
+    z-index: 998;
     /* size */
     width: 100%;
     height: 28px;

@@ -1,5 +1,5 @@
 /// typescript
-import { MapThemeToData, type PossibleThemeData, type PossibleThemeType } from '../types/common'
+import { MapScreenToData, MapThemeToData, type PossibleScreenData, type PossibleScreenSaverType, type PossibleThemeData, type PossibleThemeType } from '../types/common'
 
 /* support */
 export function getCookie(name: string) {
@@ -30,4 +30,13 @@ export function changeTheme(theme: PossibleThemeType) {
 export function getTheme(): PossibleThemeData {
   const htmlAttribute: PossibleThemeType = document.documentElement.getAttribute('data-theme') as PossibleThemeType || 'violet' 
   return MapThemeToData[htmlAttribute]
+}
+/* screen saver */
+export function changeScreen(screen: PossibleScreenSaverType) {
+  setCookie('screen', screen, 365)
+  document.documentElement.setAttribute('data-screen', screen)
+}
+export function getScreen(): PossibleScreenData {
+  const htmlAttribute: PossibleScreenSaverType = document.documentElement.getAttribute('data-screen') as PossibleScreenSaverType || 'fish'
+  return MapScreenToData[htmlAttribute] 
 }
