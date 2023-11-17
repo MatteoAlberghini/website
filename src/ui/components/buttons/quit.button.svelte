@@ -64,7 +64,7 @@
     width: 46px;
     height: 40px;
     /* color */
-    background-color: var(--color-button-bg);
+    background-color: var(--color-highlight);
     background-image: url(/bg-texture.png);
     /* display */
     display: flex;
@@ -82,8 +82,8 @@
     justify-content: center;
     align-items: center;
     /* color */
-    background-color: var(--color-button);
-    border: 2px solid var(--color-button-bg);
+    background-color: var(--color-background);
+    border: 2px solid var(--color-highlight);
     background-image: url(/bg-texture.png);
     /* animation */
     transform: translateY(-3px);

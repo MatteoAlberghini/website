@@ -6,7 +6,7 @@
   import { expoOut } from 'svelte/easing'
   import { fade } from 'svelte/transition'
   import SimpleBarJS from "simplebar"
-  import { modalFocused } from '../../stores/modals.store'
+  import { modalFocused } from '../../../stores/modals.store'
   /* exports */
   export let initialWidth: string = '550px'
   export let initialHeight: string = '450px'
@@ -215,6 +215,7 @@
       class="modal-close"
       on:click={closeModal}
       bind:this={closeButton}
+      style:border-color={mainColor}
     >
       <svg class="modal-close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
         <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
@@ -268,9 +269,7 @@
   /* container */
   .modal-container {
     /* color */
-    background-color: var(--color-background-secondary);
     background-image: url(/bg-texture.png);
-    box-shadow: var(--color-background-secondary-opacity) 1px 1px 1px 1px;
     /* position */
     position: absolute;
     overflow: hidden;
@@ -297,7 +296,8 @@
     /* color */
     background-color: transparent;
     /* border */
-    border-left: 1px solid var(--color-background-secondary);
+    border-left-width: 1px;
+    border-left-style: solid;
     /* font */
     font-size: 14px;
     /* flex */
@@ -338,7 +338,7 @@
     /* cursor */
     cursor: pointer;
     /* color */
-    background-color: var(--color-highlight-opacity);
+    background-color: var(--color-highlight-hover);
     /* animation */
     transition: background-color 220ms ease-out;
   }

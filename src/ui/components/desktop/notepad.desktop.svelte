@@ -2,8 +2,8 @@
 <script lang="ts">
   /* imports */
   import { draggable } from '@neodrag/svelte'
-  import Document from '../atoms/icons/notepad.svelte'
-  import ResizableModal from './resizable.modal.svelte'
+  import Document from '../../atoms/icons/notepad.svelte'
+  import ResizableModal from '../modal/resizable.modal.svelte'
   /* exports */
   export let text: string
   export let modalWidth: string = '600px'
@@ -72,7 +72,7 @@
     /* cursor */
     cursor: pointer;
     /* color */
-    background-color: var(--color-highlight-opacity);
+    background-color: var(--color-highlight-hover);
     border-width: 1px;
     border-color: var(--color-highlight);
     /* animation */

@@ -2,8 +2,8 @@
 <script lang="ts">
   /* imports */
   import { draggable } from '@neodrag/svelte'
-  import Computer from '../atoms/icons/computer.svelte'
-  import ResizableModal from './resizable.modal.svelte'
+  import Folder from '../../atoms/icons/folder.svelte'
+  import ResizableModal from '../modal/resizable.modal.svelte'
   /* exports */
   export let text: string
   export let modalWidth: string = '600px'
@@ -26,7 +26,7 @@
   on:dblclick={onDoubleClick}
 >
   <div class="icon-container">
-    <Computer />
+    <Folder />
   </div>
   <span class="icon-name">
     {text}
@@ -42,9 +42,7 @@
     top={modalTop}
     left={modalLeft}
     text={text}
-  >
-    <slot />
-  </ResizableModal>
+  />
 {/if}
 
 <!-- style -->
@@ -72,7 +70,7 @@
     /* cursor */
     cursor: pointer;
     /* color */
-    background-color: var(--color-highlight-opacity);
+    background-color: var(--color-highlight-hover);
     border-width: 1px;
     border-color: var(--color-highlight);
     /* animation */
