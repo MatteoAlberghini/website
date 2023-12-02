@@ -4,7 +4,7 @@
   border-radius: 0px;
 }
 .simplebar-scrollbar.simplebar-visible:before {
-  opacity: 0.5;
+  opacity: 1;
 }
 /* track */
 .simplebar-track.simplebar-vertical {

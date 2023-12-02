@@ -1,28 +1,45 @@
 <!-- script -->
 <script lang="ts">
   /* imports */
-  import FishScreen from '../components/screens/fish.screen.svelte'
   import { isScreenPlaying, currentScreen } from '../../stores/screen.store'
+  import { clickAudioPlayer, soundActive, soundVolume } from '../../stores/sounds.store'
   import { onMount } from 'svelte'
-  import { getScreen } from '../../support/cookies'
+  import { getScreen, getSoundActive, getSoundVolume } from '../../support/cookies'
+  import FishScreen from '../components/screens/fish.screen.svelte'
   import PlanetScreen from '../components/screens/planet.screen.svelte'
+  import RainScreen from '../components/screens/rain.screen.svelte'
 
   /* stores */
   $: screenPlaying = $isScreenPlaying
   $: screen = $currentScreen
-  onMount(() => { currentScreen.set(getScreen().value) })
+  $: $soundVolume, updateSound()
+  onMount(() => {
+    /// screen saver
+    currentScreen.set(getScreen().value)
+    /// sound
+    soundActive.set(getSoundActive())
+    soundVolume.set(getSoundVolume())
+    updateSound()
+  })  
   /* functions */
   function disableScreen() { isScreenPlaying.set(false) }
+  function updateSound() { if ($clickAudioPlayer) { $clickAudioPlayer.volume = $soundVolume } }
 </script>
 
 <!-- template -->
 <section>
+  <audio
+    src="/audio/click.ogg"
+    bind:this={$clickAudioPlayer}
+  />
   <!-- all screensavers -->
   {#if screenPlaying === true}
     {#if screen === 'fish'}
       <FishScreen on:disableScreen={disableScreen} />
     {:else if screen === 'planet'}
       <PlanetScreen on:disableScreen={disableScreen} />
+    {:else if screen === 'rain'}
+      <RainScreen on:disableScreen={disableScreen} />
     {/if}
   {/if}
   <!-- content -->
@@ -116,7 +133,9 @@
       row-gap: 8px;
       /* padding */
       padding-left: 8px;
-      padding-right: 8px;
+      padding-right: 16px;
+      padding-top: 24px;
+      padding-bottom: 24px;
     }
   }
 </style>

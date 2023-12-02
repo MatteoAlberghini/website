@@ -1,13 +1,32 @@
 <!-- script -->
-<script>
+<script lang="ts">
+  /* css imports */
   import 'simplebar/dist/simplebar.css'
   import '../styles/fonts.css'
   import '../styles/scrollbars.css'
+  /* ui imports */
+  import Desktop from '../ui/macro/desktop.svelte'
+  import Settings from '../ui/micro/settings.svelte'
+  import Changelog from '../ui/micro/changelog.svelte'
+  import Projects from '../ui/micro/projects.svelte'
+  import Music from '../ui/micro/music.svelte'
+  import Contact from '../ui/micro/contact.svelte'
+  import Blog from '../ui/micro/blog.svelte'
+  import Support from '../ui/micro/linkedin.svelte'
 </script>
 
 <!-- template -->
 <main>
-  <slot />
+  <Desktop>
+    <Music />
+    <Projects />
+    <Blog />
+    <Contact />
+    <Settings gridRow="-2" gridColumn="1" />
+    <Changelog gridRow="-3" gridColumn="1" />
+    <Support gridColumn="-2" />
+    <slot />
+  </Desktop>
 </main>
 
 <!-- style -->
@@ -18,6 +37,7 @@
     --color-background: #B682FF;
     --color-highlight: #FFD200;
     --color-highlight-hover: #FFD20030;
+    --color-selector: #BF354b;
     /* defaults */
     --color-white: #FFF4E9;
     --color-black: #27213C;
@@ -27,6 +47,7 @@
     --color-neon-violet: #F60099;
   }
   [data-theme='yellow']:root {
+    --color-selector: #BF354b;
     --color-background: #DACE62;
     --color-highlight: #ffb003;
     --color-highlight-hover: #ffb00360;
@@ -67,6 +88,11 @@
     outline: 0;
     /* text */
     font-family: 'Dosis', Arial, sans-serif;
+  }
+  :global(::selection) {
+    /* color */
+    color: var(--color-highlight);
+    background-color: var(--color-selector);
   }
   /* main */
   main { /* todo mobile version */
