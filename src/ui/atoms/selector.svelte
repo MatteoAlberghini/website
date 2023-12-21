@@ -144,8 +144,6 @@
     border-bottom-width: 3px;
     /* margins */
     padding-left: 7px;
-    /* cursor */
-    cursor: pointer;
   }
   .dropdown-icon {
     /* size */
@@ -230,8 +228,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    /* cursor */
-    cursor: pointer;
     /* position */
     position: relative;
     overflow: hidden;

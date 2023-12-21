@@ -75,8 +75,6 @@
     /* color */
     background-color: var(--color-background);
     background-image: url(/bg-texture.png);
-    /* cursor */
-    cursor: pointer;
     /* flex */
     display: flex;
     justify-content: center;

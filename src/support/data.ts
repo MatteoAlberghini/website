@@ -1,5 +1,5 @@
 /* imports */
-import type { LogSettingsType, SelectorType } from '../types/common'
+import type { ContactType, LogSettingsType, SelectorType } from '../types/common'
 
 /* logs */
 export const logs: LogSettingsType[] = [
@@ -91,10 +91,6 @@ export const logs: LogSettingsType[] = [
             'add an icon for a guestbook, where users can submit something to the website and will be send to me for approval and shown to everyone.'
         },
         {
-          title: 'add modal for feedback / contacts',
-          content: 'add a modal to contact/feedback. handle form submission and send data to a backend/email.'
-        },
-        {
           title: 'add modal for projects',
           content: `
             add a modal to projects icon. need a list of all projects and links to them, or they open a page for it?
@@ -108,9 +104,9 @@ export const logs: LogSettingsType[] = [
       ],
       progress: [
         {
-          title: 'external links icons on desktop',
-          content: 'add external links icons for desktop, arrow animation to indicate on hover.',
-      }
+          title: 'add modal for feedback / contacts',
+          content: 'add a modal to contact/feedback. handle form submission and send data to a backend/email.'
+        },
       ],
       done: [
         {
@@ -119,6 +115,10 @@ export const logs: LogSettingsType[] = [
             at the moment, the link navigation works great for <a href="/settings?t=focus">the settings screen</a>,
             but needs to work correctly also for page navigation, such as the <a href="/projects?t=focus">projects screen</a>
           `
+        },
+        {
+          title: 'external links icons on desktop',
+          content: 'add external links icons for desktop, arrow animation to indicate on hover.',
         },
       ],
     }
@@ -134,6 +134,46 @@ export const currentVersion: SelectorType & { id: number } = { value: '2', text:
 export const dropdownContacts: SelectorType[] = [
   { value: '0', text: 'contact me' },
   { value: '1', text: 'suggest changes' },
-  { value: '2', text: 'submit feedback' },
 ]
 export const currentContact: SelectorType & { id: number } = { value: '0', text: 'contact me', id: 0 }
+export const contacts: ContactType[] = [
+  {
+    id: '0',
+    url: '/api/contact',
+    inputs: [
+      {
+        id: 'username',
+        label: 'nick/alias',
+        labelAddition: '[ you can avoid using your real name ]',
+        isRequired: true,
+        type: 'input',
+        inputType: 'username',
+      },
+      {
+        id: 'info',
+        label: 'your message*',
+        isRequired: true,
+        type: 'area',
+      },
+    ],
+  },
+  {
+    id: '1',
+    url: '/api/suggest-changes',
+    inputs: [
+      {
+        id: 'username',
+        label: 'email*',
+        isRequired: true,
+        type: 'input',
+        inputType: 'text',
+      },
+      {
+        id: 'info',
+        label: 'describe what you would like to change*',
+        isRequired: true,
+        type: 'area',
+      },
+    ],
+  },
+]

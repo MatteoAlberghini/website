@@ -4,6 +4,8 @@
   import 'simplebar/dist/simplebar.css'
   import '../styles/fonts.css'
   import '../styles/scrollbars.css'
+  /* stores */
+  import { soundActive, clickAudioPlayer } from '../stores/sounds.store'
   /* ui imports */
   import Desktop from '../ui/macro/desktop.svelte'
   import Settings from '../ui/micro/settings.svelte'
@@ -13,9 +15,19 @@
   import Contact from '../ui/micro/contact.svelte'
   import Blog from '../ui/micro/blog.svelte'
   import Support from '../ui/micro/linkedin.svelte'
+
+  /* functions */
+  function onClick() {
+    if ($soundActive === true) { $clickAudioPlayer.play() }
+  }
 </script>
 
 <!-- template -->
+<svelte:window on:click={onClick} />
+<svelte:head>
+  <link rel="preload" as="image" href="/cursor.png" />
+  <link rel="preload" as="image" href="/cursor_click.png" />
+</svelte:head>
 <main>
   <Desktop>
     <Music />
@@ -88,6 +100,16 @@
     outline: 0;
     /* text */
     font-family: 'Dosis', Arial, sans-serif;
+    /* cursor */
+    cursor: url(/cursor.png) 0 12, pointer;
+  }
+  :global(*:hover) {
+    /* cursor */
+    cursor: url(/cursor.png) 0 12, pointer;
+  }
+  :global(*:active) {
+    /* cursor */
+    cursor: url(/cursor_click.png) 0 12, pointer;
   }
   :global(::selection) {
     /* color */

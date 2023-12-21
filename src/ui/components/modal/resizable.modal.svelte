@@ -331,8 +331,6 @@
     fill: var(--color-neon-yellow);
   }
   .modal-close:hover {
-    /* cursor */
-    cursor: pointer;
     /* color */
     background-color: var(--color-highlight-hover);
     /* animation */

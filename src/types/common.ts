@@ -68,3 +68,16 @@ export type LogSettingsType = {
   version: string,
   data: { todo: SingleLogType[], progress: SingleLogType[], done: SingleLogType[] },
 }
+/* contacts */
+export type ContactType = {
+  id: string,
+  url: string,
+  inputs: {
+    id: string,
+    type: 'input' | 'area',
+    label: string,
+    labelAddition?: string,
+    inputType?: string,
+    isRequired: boolean,
+  }[]
+} 

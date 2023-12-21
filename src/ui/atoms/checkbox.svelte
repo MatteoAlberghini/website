@@ -46,8 +46,6 @@
     gap: 12px;
     /* position */
     position: relative;
-    /* cursor */
-    cursor: pointer;
   }
   input {
     /* reset */
@@ -70,8 +68,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* cursor */
-    cursor: pointer;
   }
   input::before {
     /* content */

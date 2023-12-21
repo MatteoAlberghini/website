@@ -3,11 +3,12 @@
   /* props */
   export let id: string
   export let label: string
+  export let max: number
 </script>
 
 <!-- template -->
 <label for={id}>{label}</label>
-<textarea id={id} />
+<textarea name={id} id={id} maxlength={max} />
 
 <!-- style -->
 <style>
@@ -29,7 +30,7 @@
     margin-right: 10px;
     padding-left: 7px;
     padding-right: 7px;
-    padding-top: 4px;
+    padding-top: 6px;
     margin-top: 4px;
     /* size */
     height: 176px;

@@ -87,8 +87,6 @@
     background-color: transparent;
   }
   .desktop-item:hover, .desktop-item:focus {
-    /* cursor */
-    cursor: pointer;
     /* color */
     background-color: var(--color-highlight-hover);
     box-shadow: inset 0 0 0 1px var(--color-highlight);

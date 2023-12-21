@@ -29,8 +29,6 @@
     background-image: url(/bg-texture.png);
     /* display */
     display: flex;
-    /* cursor */
-    cursor: pointer;
   }
   span {
     /* size */
