@@ -10,8 +10,10 @@
   /* exports */
   export let initialWidth: string = '550px'
   export let initialHeight: string = '450px'
-  export let top: string = '20%'
-  export let left: string = '40%'
+  export let top: string | undefined
+  export let left: string | undefined
+  export let right: string | undefined
+  export let bottom: string | undefined
   export let uniqueId: number
   export let mainColor: string = '#312454'
   export let text: string
@@ -35,7 +37,6 @@
   function onMouseDownDR(event: MouseEvent) {
     if (!modalContainer) { return }
     modalFocused.set(uniqueId)
-    modalContainer.style.zIndex = '50'
     activeDrag = 'down-right'
     const rect = modalContainer.getBoundingClientRect()
     const parent = modalContainer.parentElement?.getBoundingClientRect()        
@@ -52,7 +53,6 @@
   function onMouseDownDL(event: MouseEvent) {
     if (!modalContainer) { return }
     modalFocused.set(uniqueId)
-    modalContainer.style.zIndex = '50'
     activeDrag = 'down-left'
     const rect = modalContainer.getBoundingClientRect()
     const parent = modalContainer.parentElement?.getBoundingClientRect()        
@@ -69,7 +69,6 @@
   function onMouseDownD(event: MouseEvent) {
     if (!modalContainer) { return }
     modalFocused.set(uniqueId)
-    modalContainer.style.zIndex = '50'
     activeDrag = 'down'
     const rect = modalContainer.getBoundingClientRect()
     const parent = modalContainer.parentElement?.getBoundingClientRect()        
@@ -87,7 +86,6 @@
     if (!modalNavbar) { return }
     if (!modalContainer) { return }
     modalFocused.set(uniqueId)
-    modalContainer.style.zIndex = '50'
     modalXPos = event.clientX
     modalYPos = event.clientY
     activeDrag = 'modal'
@@ -95,7 +93,6 @@
   function onMouseDown() {
     if (!modalContainer) { return }
     modalFocused.set(uniqueId)
-    modalContainer.style.zIndex = '50'
   }
   function onMouseUp() {
     initialRect = null
@@ -162,11 +159,14 @@
   /* modal functions */
   function closeModal() { dispatch('closeModal') }
   const onKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') { closeModal() } }
-  /* stores */
+  /* reactive */
   $: $modalFocused, focusChanged()
   function focusChanged() {
-    if ($modalFocused === uniqueId) { return }
     if (!modalContainer) { return }
+    if ($modalFocused === uniqueId) {
+      modalContainer.style.zIndex = '50'
+      return  
+    }
     modalContainer.style.zIndex = '49'
   }
   /* on load */
@@ -191,6 +191,8 @@
   style:height={initialHeight}
   style:top={top}
   style:left={left}
+  style:right={right}
+  style:bottom={bottom}
   style:z-index="49"
   style:background-color={mainColor}
   style:box-shadow={`${mainColor}30 1px 1px 1px 1px`}
@@ -236,9 +238,7 @@
   />
   <div
     class="modal-bottom-bar"
-    role="button"
     data-direction="down"
-    tabindex="0"
     bind:this={bottomHandler}
     on:mousedown={onMouseDownD}
   />
@@ -247,16 +247,12 @@
   </div>
   <!-- directional buttons -->
   <div
-    role="button"
-    tabindex="0"
     data-direction="down-right"
     class="bottom-right-handler"
     bind:this={bottomRightHandler}
     on:mousedown={onMouseDownDR}
   />
   <div
-    role="button"
-    tabindex="0"
     data-direction="down-left"
     class="bottom-left-handler"
     bind:this={bottomleftHandler}
@@ -335,8 +331,6 @@
     fill: var(--color-neon-yellow);
   }
   .modal-close:hover {
-    /* cursor */
-    cursor: pointer;
     /* color */
     background-color: var(--color-highlight-hover);
     /* animation */

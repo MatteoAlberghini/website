@@ -1,13 +1,44 @@
 <!-- script -->
-<script>
+<script lang="ts">
+  /* css imports */
   import 'simplebar/dist/simplebar.css'
   import '../styles/fonts.css'
   import '../styles/scrollbars.css'
+  /* stores */
+  import { soundActive, clickAudioPlayer } from '../stores/sounds.store'
+  /* ui imports */
+  import Desktop from '../ui/macro/desktop.svelte'
+  import Settings from '../ui/micro/settings.svelte'
+  import Changelog from '../ui/micro/changelog.svelte'
+  import Projects from '../ui/micro/projects.svelte'
+  import Music from '../ui/micro/music.svelte'
+  import Contact from '../ui/micro/contact.svelte'
+  import Blog from '../ui/micro/blog.svelte'
+  import Support from '../ui/micro/linkedin.svelte'
+
+  /* functions */
+  function onClick() {
+    if ($soundActive === true) { $clickAudioPlayer.play() }
+  }
 </script>
 
 <!-- template -->
+<svelte:window on:click={onClick} />
+<svelte:head>
+  <link rel="preload" as="image" href="/cursor.png" />
+  <link rel="preload" as="image" href="/cursor_click.png" />
+</svelte:head>
 <main>
-  <slot />
+  <Desktop>
+    <Music />
+    <Projects />
+    <Blog />
+    <Contact />
+    <Settings gridRow="-2" gridColumn="1" />
+    <Changelog gridRow="-3" gridColumn="1" />
+    <Support gridColumn="-2" />
+    <slot />
+  </Desktop>
 </main>
 
 <!-- style -->
@@ -18,6 +49,7 @@
     --color-background: #B682FF;
     --color-highlight: #FFD200;
     --color-highlight-hover: #FFD20030;
+    --color-selector: #BF354b;
     /* defaults */
     --color-white: #FFF4E9;
     --color-black: #27213C;
@@ -27,6 +59,7 @@
     --color-neon-violet: #F60099;
   }
   [data-theme='yellow']:root {
+    --color-selector: #BF354b;
     --color-background: #DACE62;
     --color-highlight: #ffb003;
     --color-highlight-hover: #ffb00360;
@@ -67,6 +100,21 @@
     outline: 0;
     /* text */
     font-family: 'Dosis', Arial, sans-serif;
+    /* cursor */
+    cursor: url(/cursor.png) 0 12, pointer;
+  }
+  :global(*:hover) {
+    /* cursor */
+    cursor: url(/cursor.png) 0 12, pointer;
+  }
+  :global(*:active) {
+    /* cursor */
+    cursor: url(/cursor_click.png) 0 12, pointer;
+  }
+  :global(::selection) {
+    /* color */
+    color: var(--color-highlight);
+    background-color: var(--color-selector);
   }
   /* main */
   main { /* todo mobile version */

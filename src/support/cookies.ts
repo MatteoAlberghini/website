@@ -1,5 +1,5 @@
-/// typescript
-import { MapScreenToData, MapThemeToData, type PossibleScreenData, type PossibleScreenSaverType, type PossibleThemeData, type PossibleThemeType } from '../types/common'
+/* typescript imports */
+import { MapScreenToData, MapThemeToData, type PossibleScreenData, type PossibleScreenSaverType, type PossibleThemeData, type PossibleThemeType, type PossibleVolumeSettingType } from '../types/common'
 
 /* support */
 export function getCookie(name: string) {
@@ -39,4 +39,23 @@ export function changeScreen(screen: PossibleScreenSaverType) {
 export function getScreen(): PossibleScreenData {
   const htmlAttribute: PossibleScreenSaverType = document.documentElement.getAttribute('data-screen') as PossibleScreenSaverType || 'fish'
   return MapScreenToData[htmlAttribute] 
+}
+/* sounds */
+export function changeSoundActive(isActive: boolean) {
+  setCookie('sound_active', isActive.toString(), 365)
+  document.documentElement.setAttribute('data-sound-active', isActive.toString())
+}
+export function getSoundActive(): boolean {
+  const htmlAttribute: string = document.documentElement.getAttribute('data-sound-active') || 'false'
+  return htmlAttribute === 'true'
+}
+export function changeSoundVolume(volume: PossibleVolumeSettingType) {
+  setCookie('sound_volume', volume.toString(), 365)
+  document.documentElement.setAttribute('data-sound-volume', volume.toString())
+}
+export function getSoundVolume(): PossibleVolumeSettingType {
+  const htmlAttribute: string = document.documentElement.getAttribute('data-sound-volume') || '0.05'
+  const number = parseFloat(htmlAttribute)
+  if (number) { return number as PossibleVolumeSettingType }
+  return 0.05
 }
