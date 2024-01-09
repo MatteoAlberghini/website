@@ -44,7 +44,7 @@
       })
     }
   }
-  function navigateContacts() { goto('/contacts?t=focus') }
+  function navigateContacts() { goto('/contacts?t=focus&s=1') }
   /* callbacks */
   function selectorCallback(e: CustomEvent<{ value: string, text: string }>) {
     selected = e.detail.text

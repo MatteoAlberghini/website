@@ -27,6 +27,7 @@
 	"type": "module",
 	"dependencies": {
 		"@neodrag/svelte": "^2.0.3",
+		"@supabase/supabase-js": "^2.39.1",
 		"simplebar": "^6.2.5"
 	}
 }

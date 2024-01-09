@@ -53,6 +53,7 @@
     /* defaults */
     --color-white: #FFF4E9;
     --color-black: #27213C;
+    --color-error: #BF354B;
     /* color specific */
     --color-neon-yellow: #FFD200;
     --color-neon-blue: #0FD2FF;

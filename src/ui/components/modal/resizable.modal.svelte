@@ -162,6 +162,7 @@
   /* reactive */
   $: $modalFocused, focusChanged()
   function focusChanged() {
+    console.log('focus')
     if (!modalContainer) { return }
     if ($modalFocused === uniqueId) {
       modalContainer.style.zIndex = '50'
@@ -174,11 +175,11 @@
     modalFocused.set(uniqueId)
     if (!modalContainer || !closeButton) { return }
     modalContainer.style.zIndex = '50'
-    closeButton.focus()
     if (!modalContent) { return }
     new SimpleBarJS(modalContent, {
       autoHide: false,
     })
+    console.log('mount')
   })
 </script>
 

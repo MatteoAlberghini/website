@@ -4,10 +4,16 @@
   export let id: string
   export let label: string
   export let max: number
+  export let labelAddition: string | undefined
 </script>
 
 <!-- template -->
-<label for={id}>{label}</label>
+<label for={id}>
+  {label}
+  {#if labelAddition}
+    <span>{labelAddition}</span>
+  {/if}
+</label>
 <textarea name={id} id={id} maxlength={max} />
 
 <!-- style -->
@@ -23,6 +29,17 @@
     /* color */
     color: var(--color-highlight);
     text-shadow: 1px 0px var(--color-neon-blue), 0px -1px var(--color-neon-violet);
+    /* flex */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  span {
+    /* fonts */
+    font-size: 14px;
+    font-weight: 400;
+    /* color */
+    color: var(--color-highlight);
   }
   textarea {
     /* margins */

@@ -6,6 +6,7 @@ export type DefaultResponseType = {
 export type GetResponseType = DefaultResponseType & {
   data: Object | Object[] | null,
 }
+
 /* requests */
 export async function getRequest<T extends Object>(url: string): Promise<T> {
   const requestInit: RequestInit = { method: 'GET' }
