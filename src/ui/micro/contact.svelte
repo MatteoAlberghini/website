@@ -26,8 +26,10 @@
   /* constants */
   let openModal: boolean = false /* todo svelte 5 change to reactive */
   let shouldOpen: boolean = false
+  let isLoading: boolean = false
   let selected: string = currentContact.text
   let selectedContent: ContactType = contacts[currentContact.id]
+  let formMessage: { error: boolean, text: string } = { error: false, text: '' }
   /* functions */
   function onOpen() { goto('/contacts') }
   function onClose() { goto('/') }
@@ -42,6 +44,11 @@
       modalFocused.set(5)
       openModal = true
       let query = new URLSearchParams($page.url.searchParams.toString())
+      const s = query.get('s')
+      if (s && parseInt(s, 10)) {
+        selectedContent = contacts[parseInt(s, 10)]
+        selected = dropdownContacts[parseInt(s, 10)].text
+      }
       query.delete('t')
       goto(`?${query.toString()}`).then(() => {
         openModal = false
@@ -55,10 +62,16 @@
     selectedContent = contacts.filter((v) => v.id === e.detail.value)[0]
   }
   async function submitRequest() {
+    isLoading = true
     if (!selectedContent || !formRef) { return }
     let formData = new FormData(formRef)
     const response = await postRequest<DefaultResponseType>(selectedContent.url, formData)
-    console.log(response)
+    isLoading = false
+    if (response.success === true) {
+      formMessage = { error: false, text: '[ submission has been registered correctly ]'}
+    } else {
+      formMessage = { error: true, text: `[ ${response.error} ]` }
+    }
   }
   /* stores */
   $: $page, handleInitialPage()
@@ -88,35 +101,39 @@
         on:itemClick={selectorCallback}
       />
     </div>
-    <form class="inputs-container" bind:this={formRef}>
-      {#each selectedContent.inputs as value}
-        {#if value.type === 'input'}
-          <Input
-            id={value.id}
-            label={value.label}
-            labelAddition={value.labelAddition}
-            type={value.inputType || 'text'}
-            max={50}
-          />
-        {/if}
-        {#if value.type === 'area'}
-          <Textarea
-            id={value.id}
-            label={value.label}
-            max={300}
-          />
-        {/if}
-      {/each}
+    <form bind:this={formRef}>
+      <div class="inputs-container">
+        {#each selectedContent.inputs as value}
+          {#if value.type === 'input'}
+            <Input
+              id={value.id}
+              label={value.label}
+              labelAddition={value.labelAddition}
+              type={value.inputType || 'text'}
+              max={50}
+            />
+          {/if}
+          {#if value.type === 'area'}
+            <Textarea
+              id={value.id}
+              label={value.label}
+              labelAddition={value.labelAddition}
+              max={300}
+            />
+          {/if}
+        {/each}
+      </div>
       <div class="button-container">
         <Button
           width="300px"
           on:click={submitRequest}
+          isLoading={isLoading}
+          message={formMessage}
         >
           <span class="button-title">submit</span>
         </Button>
       </div>
     </form>
-    <span class="label">* indicates a required field</span>
   </div>
 </ContactDesktop>
 

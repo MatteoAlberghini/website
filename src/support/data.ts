@@ -97,16 +97,8 @@ export const logs: LogSettingsType[] = [
             <a href="/projects?t=focus">link to projects</a>
           `
         },
-        {
-          title: 'button to feedback in changelog',
-          content: 'add a button linking to feedback modal in changelog modal.'
-        },
       ],
       progress: [
-        {
-          title: 'add modal for feedback / contacts',
-          content: 'add a modal to contact/feedback. handle form submission and send data to a backend/email.'
-        },
       ],
       done: [
         {
@@ -119,6 +111,14 @@ export const logs: LogSettingsType[] = [
         {
           title: 'external links icons on desktop',
           content: 'add external links icons for desktop, arrow animation to indicate on hover.',
+        },
+        {
+          title: 'add modal for feedback / contacts',
+          content: 'add a modal to contact/feedback. handle form submission and send data to a backend/email.'
+        },
+        {
+          title: 'button to feedback in changelog',
+          content: 'add a button linking to feedback modal in changelog modal.'
         },
       ],
     }
@@ -151,7 +151,8 @@ export const contacts: ContactType[] = [
       },
       {
         id: 'info',
-        label: 'your message*',
+        label: 'your message',
+        labelAddition: '[ required ]',
         isRequired: true,
         type: 'area',
       },
@@ -159,18 +160,20 @@ export const contacts: ContactType[] = [
   },
   {
     id: '1',
-    url: '/api/suggest-changes',
+    url: '/api/contact',
     inputs: [
       {
         id: 'username',
-        label: 'email*',
+        label: 'nick/alias',
+        labelAddition: '[ you can avoid using your real name ]',
         isRequired: true,
         type: 'input',
-        inputType: 'text',
+        inputType: 'username',
       },
       {
         id: 'info',
-        label: 'describe what you would like to change*',
+        label: 'your message',
+        labelAddition: '[ required ]',
         isRequired: true,
         type: 'area',
       },
