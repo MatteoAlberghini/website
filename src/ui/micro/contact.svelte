@@ -85,7 +85,7 @@
   modalWidth="750px"
   modalHeight="570px"
   modalLeft="20%"
-  modalBottom="40%"
+  modalTop="20%"
   gridColumn={gridColumn}
   gridRow={gridRow}
   openModal={openModal}
