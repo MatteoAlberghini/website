@@ -11,9 +11,7 @@
   import Settings from '../ui/micro/settings.svelte'
   import Changelog from '../ui/micro/changelog.svelte'
   import Projects from '../ui/micro/projects.svelte'
-  import Music from '../ui/micro/music.svelte'
   import Contact from '../ui/micro/contact.svelte'
-  import Blog from '../ui/micro/blog.svelte'
   import Support from '../ui/micro/linkedin.svelte'
 
   /* functions */
@@ -30,18 +28,19 @@
 </svelte:head>
 <main>
   <Desktop>
-    <Music />
+    <Changelog />
     <Projects />
-    <Blog />
     <Contact />
     <Settings gridRow="-2" gridColumn="1" />
-    <Changelog gridRow="-3" gridColumn="1" />
     <Support gridColumn="-2" />
     <slot />
   </Desktop>
 </main>
 
-<!-- style -->
+<!-- style
+<Blog />
+<Music />
+-->
 <style>
   /* global */
   :root { /* todo streamline colors better */

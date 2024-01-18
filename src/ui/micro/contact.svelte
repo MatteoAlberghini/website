@@ -171,18 +171,6 @@
     width: 100%;
     max-width: 500px;
   }
-  .label {
-    /* margins */
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 3px;
-    /* fonts */
-    font-size: 14px;
-    font-weight: 400;
-    /* color */
-    color: var(--color-highlight);
-    text-shadow: 1px 0px var(--color-neon-blue), 0px -1px var(--color-neon-violet);
-  }
   .button-container {
     /* margins */
     margin-left: 10px;

@@ -76,7 +76,9 @@
     right={modalRight}
     bottom={modalBottom}
     text={text}
-  />
+  >
+    <slot />
+  </ResizableModal>
 {/if}
 
 <!-- style -->

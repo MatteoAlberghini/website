@@ -1,5 +1,5 @@
 /* imports */
-import type { ContactType, LogSettingsType, SelectorType } from '../types/common'
+import type { ContactType, LogSettingsType, ProjectOverviewType, SelectorType } from '../types/common'
 
 /* logs */
 export const logs: LogSettingsType[] = [
@@ -178,5 +178,34 @@ export const contacts: ContactType[] = [
         type: 'area',
       },
     ],
+  },
+]
+/* projects */
+export const projectsOverview: ProjectOverviewType[] = [
+  {
+    link: 'https://genuino.world/',
+    title: 'Genuino',
+    type: 'work',
+    tag: ['app', 'website', 'iot'],
+    image: '/images/projects/genuino.jpg',
+    description: `digital collection of NFTs connected with real world objects. worked on react native app & react frontend website.
+    the app interfaces with NFC tags embedded into the sold objects.`
+  },
+  {
+    link: 'https://waterkaarten.app/',
+    title: 'Waterkaarten',
+    type: 'work',
+    tag: ['app'],
+    image: '/images/projects/waterkaarten.jpg',
+    description: `maps for water in the netherlands, germany, UK, and other EU countries. 
+    worked on native ios and android apps, improving UI and features.`
+  },
+  {
+    link: 'https://o9solutions.com/',
+    title: 'o9Solutions',
+    type: 'work',
+    tag: ['website'],
+    image: '/images/projects/o9solutions.png',
+    description: `software for supply chain management. worked on the marketing website with react.`
   },
 ]

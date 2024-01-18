@@ -187,22 +187,24 @@
     <span class="modal-title">
       {text}
     </span>
-    <button
-      class="modal-close"
-      on:click={closeModal}
-      bind:this={closeButton}
-      style:border-color={mainColor}
-    >
-      <svg class="modal-close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-        <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-      </svg>
-      <svg class="modal-close-icon modal-close-icon-after" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-        <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-      </svg>
-      <svg class="modal-close-icon modal-close-icon-after-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-        <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-      </svg>
-    </button>
+    <div class="buttons-container">
+      <button
+        class="modal-close"
+        on:click={closeModal}
+        bind:this={closeButton}
+        style:border-color={mainColor}
+      >
+        <svg class="modal-close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
+        </svg>
+        <svg class="modal-close-icon modal-close-icon-after" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
+        </svg>
+        <svg class="modal-close-icon modal-close-icon-after-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
+        </svg>
+      </button>
+    </div>
   </div>
   <div class="modal-content" bind:this={modalContent}>
     <slot />
@@ -259,7 +261,36 @@
     display: flex;
   }
   /* close / navbar */
+  .buttons-container {
+    /* flex */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    /* size */
+    height: 100%;
+  }
   .modal-close {
+    /* size */
+    width: 48px;
+    height: 100%;
+    /* color */
+    background-color: transparent;
+    /* border */
+    border-left-width: 1px;
+    border-left-style: solid;
+    /* font */
+    font-size: 14px;
+    /* flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    /* position */
+    position: relative;
+  }
+  .modal-fullscreen {
     /* size */
     width: 48px;
     height: 100%;

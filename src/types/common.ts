@@ -81,3 +81,12 @@ export type ContactType = {
     isRequired: boolean,
   }[]
 } 
+/* projects */
+export type ProjectOverviewType = {
+  link: string,
+  title: string,
+  description: string,
+  image: string,
+  type: 'work' | 'personal',
+  tag: ('website' | 'app' | 'iot')[],
+}
