@@ -7,6 +7,14 @@
   import { fade } from 'svelte/transition'
   import SimpleBarJS from "simplebar"
   import { modalFocused } from '../../../stores/modals.store'
+  /* types */
+  type DragType = 'down-right' | 'down-left' | 'modal' | 'down' | ''
+  type InitialRectType = {
+    width: number, height: number, left: number, right: number, top: number, bottom: number,
+  } | null
+  type InitialPositionType = {
+    x: number, y: number,
+  } | null
   /* exports */
   export let initialWidth: string = '550px'
   export let initialHeight: string = '450px'
@@ -28,67 +36,34 @@
   /* dispatchers */
   const dispatch = createEventDispatcher()
   /* constants */
-  let initialRect: any = null
-  let initialPos: any = null
-  let activeDrag: 'down-right' | 'down-left' | 'modal' | 'down' | '' = ''
+  let initialRect: InitialRectType = null
+  let initialPos: InitialPositionType = null
+  let activeDrag: DragType = ''
   let modalXPos: number | null = null
   let modalYPos: number | null = null
   /* callbacks */
-  function onMouseDownDR(event: MouseEvent) {
+  function mouseDownHandler(event: MouseEvent, type: DragType) {
     if (!modalContainer) { return }
-    modalFocused.set(uniqueId)
-    activeDrag = 'down-right'
-    const rect = modalContainer.getBoundingClientRect()
-    const parent = modalContainer.parentElement?.getBoundingClientRect()        
-    initialRect = {
-      width: rect.width,
-      height: rect.height,
-      left: rect.left - parent.left,
-      right: parent.right - rect.right,
-      top: rect.top - parent.top,
-      bottom: parent.bottom - rect.bottom
-    }
-    initialPos = { x: event.pageX, y: event.pageY }
-  }
-  function onMouseDownDL(event: MouseEvent) {
-    if (!modalContainer) { return }
-    modalFocused.set(uniqueId)
-    activeDrag = 'down-left'
-    const rect = modalContainer.getBoundingClientRect()
-    const parent = modalContainer.parentElement?.getBoundingClientRect()        
-    initialRect = {
-      width: rect.width,
-      height: rect.height,
-      left: rect.left - parent.left,
-      right: parent.right - rect.right,
-      top: rect.top - parent.top,
-      bottom: parent.bottom - rect.bottom
-    }
-    initialPos = { x: event.pageX, y: event.pageY }
-  }
-  function onMouseDownD(event: MouseEvent) {
-    if (!modalContainer) { return }
-    modalFocused.set(uniqueId)
-    activeDrag = 'down'
-    const rect = modalContainer.getBoundingClientRect()
-    const parent = modalContainer.parentElement?.getBoundingClientRect()        
-    initialRect = {
-      width: rect.width,
-      height: rect.height,
-      left: rect.left - parent.left,
-      right: parent.right - rect.right,
-      top: rect.top - parent.top,
-      bottom: parent.bottom - rect.bottom
-    }
-    initialPos = { x: event.pageX, y: event.pageY }
-  }
-  function onMouseDownNavbar(event: MouseEvent) {
     if (!modalNavbar) { return }
-    if (!modalContainer) { return }
     modalFocused.set(uniqueId)
-    modalXPos = event.clientX
-    modalYPos = event.clientY
-    activeDrag = 'modal'
+    activeDrag = type
+    if (type === 'modal') {
+      modalXPos = event.clientX
+      modalYPos = event.clientY
+      return
+    }
+    const rect = modalContainer.getBoundingClientRect()
+    const parent = modalContainer.parentElement?.getBoundingClientRect()
+    if (!parent) { return }
+    initialRect = {
+      width: rect.width,
+      height: rect.height,
+      left: rect.left - parent.left,
+      right: parent.right - rect.right,
+      top: rect.top - parent.top,
+      bottom: parent.bottom - rect.bottom
+    }
+    initialPos = { x: event.pageX, y: event.pageY }
   }
   function onMouseDown() {
     if (!modalContainer) { return }
@@ -115,7 +90,7 @@
       return
     }
     /// expanding
-    if (!bottomRightHandler || !bottomleftHandler || !bottomHandler || !initialPos) { return }
+    if (!bottomRightHandler || !bottomleftHandler || !bottomHandler || !initialPos || !initialRect) { return }
     let direction = ''
     let delta: number = 0
     if (activeDrag === 'down-right') {
@@ -162,7 +137,6 @@
   /* reactive */
   $: $modalFocused, focusChanged()
   function focusChanged() {
-    console.log('focus')
     if (!modalContainer) { return }
     if ($modalFocused === uniqueId) {
       modalContainer.style.zIndex = '50'
@@ -179,7 +153,6 @@
     new SimpleBarJS(modalContent, {
       autoHide: false,
     })
-    console.log('mount')
   })
 </script>
 
@@ -209,28 +182,34 @@
     tabindex="0"
     class="modal-navbar"
     bind:this={modalNavbar}
-    on:mousedown={onMouseDownNavbar}
+    on:mousedown={(e) => mouseDownHandler(e, 'modal')}
   >
     <span class="modal-title">
       {text}
     </span>
-    <button
-      class="modal-close"
-      on:click={closeModal}
-      bind:this={closeButton}
-      style:border-color={mainColor}
-    >
-      <svg class="modal-close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-        <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-      </svg>
-      <svg class="modal-close-icon modal-close-icon-after" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-        <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-      </svg>
-      <svg class="modal-close-icon modal-close-icon-after-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-        <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-      </svg>
-    </button>
+    <div class="buttons-container">
+      <button
+        class="modal-close"
+        on:click={closeModal}
+        bind:this={closeButton}
+        style:border-color={mainColor}
+      >
+        <svg class="modal-close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
+        </svg>
+        <svg class="modal-close-icon modal-close-icon-after" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
+        </svg>
+        <svg class="modal-close-icon modal-close-icon-after-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+          <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
+        </svg>
+      </button>
+    </div>
   </div>
+  <div class="modal-content" bind:this={modalContent}>
+    <slot />
+  </div>
+  <!-- directional buttons -->
   <div
     class="modal-left-bar"
   />
@@ -241,23 +220,19 @@
     class="modal-bottom-bar"
     data-direction="down"
     bind:this={bottomHandler}
-    on:mousedown={onMouseDownD}
+    on:mousedown={(e) => mouseDownHandler(e, 'down')}
   />
-  <div class="modal-content" bind:this={modalContent}>
-    <slot />
-  </div>
-  <!-- directional buttons -->
   <div
     data-direction="down-right"
     class="bottom-right-handler"
     bind:this={bottomRightHandler}
-    on:mousedown={onMouseDownDR}
+    on:mousedown={(e) => mouseDownHandler(e, 'down-right')}
   />
   <div
     data-direction="down-left"
     class="bottom-left-handler"
     bind:this={bottomleftHandler}
-    on:mousedown={onMouseDownDL}
+    on:mousedown={(e) => mouseDownHandler(e, 'down-left')}
   />
 </div>
 
@@ -286,7 +261,36 @@
     display: flex;
   }
   /* close / navbar */
+  .buttons-container {
+    /* flex */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    /* size */
+    height: 100%;
+  }
   .modal-close {
+    /* size */
+    width: 48px;
+    height: 100%;
+    /* color */
+    background-color: transparent;
+    /* border */
+    border-left-width: 1px;
+    border-left-style: solid;
+    /* font */
+    font-size: 14px;
+    /* flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    /* position */
+    position: relative;
+  }
+  .modal-fullscreen {
     /* size */
     width: 48px;
     height: 100%;
