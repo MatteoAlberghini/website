@@ -68,6 +68,7 @@
   openModal={openModal}
   on:open={onOpen}
   on:close={onClose}
+  homePath="/changelog"
 >
   <div class="content">
     <div class="first-row">

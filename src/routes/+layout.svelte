@@ -73,6 +73,7 @@
     --color-background: #FFF4E9;
     --color-highlight: #BF354b;
     --color-highlight-hover: #BF354b30;
+    --test: #544c24;
   }
   :global(body) {
     /* size */

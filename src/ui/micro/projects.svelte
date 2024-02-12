@@ -1,5 +1,7 @@
 <!-- script -->
 <script lang="ts">
+  /* typescript */
+  import type { ProjectContentType, WindowPathType } from '../../types/common'
   /* svelte imports */
   import { page } from '$app/stores'
   import { goto } from '$app/navigation'
@@ -10,31 +12,61 @@
   import { projectsOverview } from '../../support/data'
   /* ui imports */
   import FolderDesktop from '../components/desktop/folder.desktop.svelte'
-  import Button from '../atoms/button.svelte';
+  import FolderButton from '../components/buttons/folder.button.svelte'
+  import Genuino from './genuino.svelte'
+  import Waterkaarten from './waterkaarten.svelte'
+  import O9Solutions from './o9solutions.svelte'
 
   /* constants */
   let openModal: boolean = false /* todo svelte 5 change to reactive */
   let shouldOpen: boolean = false
+  let isHome: boolean = true
+  let content: ProjectContentType = 'genuino'
+  let windowPaths: WindowPathType[] = []
+  const possibleContent: ProjectContentType[] = ['genuino', 'waterkaarten', 'o9solutions']
   /* functions */
   function onOpen() { goto('/projects') }
-  function onClose() { goto('/') }
+  function onClose() {
+    goto('/')
+    isHome = true
+  }
   function handleInitialPage() {
-    if ($page.url.pathname === '/projects') {
+    if ($page.url.pathname.includes('/projects')) {
       shouldOpen = true
       if (browser) { triggerNavigation() }
     }
   }
   function triggerNavigation() {
     if (shouldOpen === true) {
-      modalFocused.set(5)
+      /* open modal and focus */
+      modalFocused.set(3)
       openModal = true
+      /* delete query (used for focusing) */
       let query = new URLSearchParams($page.url.searchParams.toString())
       query.delete('t')
-      goto(`?${query.toString()}`).then(() => {
-        openModal = false
-        shouldOpen = false
-      })
+      /* handle subpage navigation */
+      const innerProject = $page.url.pathname.split('/').slice(-1)[0]
+      /* check if its homepage */
+      if (innerProject === 'projects') {
+        goto(`?${query.toString()}`).then(() => {
+          openModal = false
+          shouldOpen = false
+          isHome = true
+          windowPaths = []
+        })
+        return
+      }
+      if (!possibleContent.includes(innerProject as ProjectContentType)) { return }
+      content = innerProject as ProjectContentType
+      isHome = false
+      windowPaths = [{ path: '/projects/' + innerProject, title: innerProject }]
     }
+  }
+  function handleFolderClick(e: CustomEvent<{ path: string, id: ProjectContentType }>) {
+    goto(e.detail.path)
+    content = e.detail.id
+    windowPaths = [{ title: e.detail.id, path: e.detail.path }]
+    isHome = false
   }
   /* stores */
   $: $page, handleInitialPage()
@@ -44,8 +76,10 @@
 <FolderDesktop
   uniqueId={3}
   text="projects.dir"
+  homePath="/projects"
+  path={windowPaths}
   mainColor="#312454"
-  modalWidth="1100px"
+  modalWidth="980px"
   modalHeight="750px"
   modalTop="20%"
   modalLeft="30%"
@@ -54,19 +88,31 @@
   on:close={onClose}
 >
   <div class="content">
+    <!-- folders -->
+    {#if isHome === true }
     {#each projectsOverview as p}
-      <a href={p.link} target="_blank" class="project-container">
-        <img
-          src={p.image}
-          alt="ahsd"
-          class="project-image"
+    <div class="folders-wrapper">
+      <span class="folders-title">{p.folderGroup}</span>
+      {#each p.items as i}
+        <FolderButton
+          id={i.id}
+          title={i.title}
+          path={i.path}
+          on:click={handleFolderClick}
         />
-        <div class="info-container">
-          <h3 class="project-title">{p.title}</h3>
-          <p class="project-description">{p.description}</p>
-        </div>
-      </a>
+      {/each}
+    </div>
     {/each}
+    <!-- folders content -->
+    {:else if isHome === false}
+      {#if content === 'genuino'}
+        <Genuino />
+      {:else if content === 'waterkaarten'}
+        <Waterkaarten />
+      {:else if content === 'o9solutions'}
+        <O9Solutions />
+      {/if}
+    {/if}
   </div>
 </FolderDesktop>
 
@@ -83,85 +129,50 @@
     /* margins */
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 32px;
+    padding-top: 16px;
     padding-bottom: 16px;
     row-gap: 1px;
   }
-  .project-container {
-    /* display */
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    text-decoration: none;
-    /* size */
-    width: 100%;
-    height: 200px;
-    /* border */
-    border: 1px solid var(--color-highlight);
-    border-bottom-width: 3px;
-  }
-  .project-container:hover {
-    border-color: var(--color-background);
-  }
-  .project-container:hover > .project-image {
-    border-color: var(--color-background);
-  }
-  .info-container {
-    /* display */
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    /* position */
-    position: relative;
-    /* margins */
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 8px;
-    padding-bottom: 16px;
-    /* size */
-    height: 100%;
-  }
-  .project-image {
-    /* color */
-    opacity: 0.7;
-    background-image: url(/bg-texture.png);
-    /* size */
-    max-width: 330px;
-    object-fit: cover;
-    /* border */
-    border-right: 1px solid var(--color-highlight);
-  }
-  .project-title {
+  .folders-wrapper {
     /* flex */
     display: flex;
-    align-self: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* border */
+    border: 1px solid var(--color-background);
+    border-bottom-width: 3px;
+    /* size */
+    width: 100%;
+    min-height: 155px;
+    /* margins */
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+    column-gap: 16px;
+    row-gap: 16px;
+    /* position */
+    position: relative;
+  }
+  .folders-title {
     /* font */
-    font-size: 28px;
+    font-size: 18px;
     font-weight: 400;
     text-shadow: 1px 1px var(--color-neon-blue), -1px -1px var(--color-neon-violet), -1px 0px var(--color-neon-yellow);
-    text-transform: uppercase;
     /* position */
     position: absolute;
-    top: -18px;
+    top: -14px;
     /* color */
     color: var(--color-highlight);
     background-color: #312454;
     background-image: url(/bg-texture.png);
     /* margins */
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-  .project-description {
-    /* margins */
-    margin-left: 8px;
-    margin-right: 6px;
-    /* font */
-    font-size: 16px;
-    font-weight: 400;
-    text-shadow: 1px 1px var(--color-neon-blue), -1px -1px var(--color-neon-violet), -1px 0px var(--color-neon-yellow);
-    letter-spacing: 0.3px;
-    /* color */
-    color: var(--color-highlight);
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 3px;
   }
 </style>

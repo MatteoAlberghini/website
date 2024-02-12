@@ -10,6 +10,11 @@ export type SelectorType = {
   value: string,
   text: string,
 }
+/* general */
+export type WindowPathType = {
+  title: string,
+  path: string,
+}
 /* icons */
 export type PossibleIconType = 'txt' | 'tool' | 'folder'
 /* theme  */
@@ -82,11 +87,17 @@ export type ContactType = {
   }[]
 } 
 /* projects */
+export type ProjectContentType = 'genuino' | 'waterkaarten' | 'o9solutions'
 export type ProjectOverviewType = {
-  link: string,
-  title: string,
-  description: string,
-  image: string,
-  type: 'work' | 'personal',
-  tag: ('website' | 'app' | 'iot')[],
+  folderGroup: string,
+  items: {
+    id: ProjectContentType,
+    link: string,
+    path: string,
+    title: string,
+    description: string,
+    image: string,
+    type: 'work' | 'personal',
+    tag: ('website' | 'app' | 'iot' | 'script')[],
+  }[],
 }
