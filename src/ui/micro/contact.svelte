@@ -91,6 +91,7 @@
   openModal={openModal}
   on:open={onOpen}
   on:close={onClose}
+  homePath="/contacts"
 >
   <div class="content">
     <div class="selector-container">

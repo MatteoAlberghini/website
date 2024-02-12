@@ -33,6 +33,7 @@
   openModal={isOpen}
   on:open={onOpen}
   on:close={onClose}
+  homePath="/music"
 >
 
 </MusicDesktop>

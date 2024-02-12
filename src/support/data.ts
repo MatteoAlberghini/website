@@ -29,6 +29,18 @@ export const logs: LogSettingsType[] = [
           title: 'update themes',
           content: 'update colors on secondary themes',
         },
+        {
+          title: 'add navigation to modals',
+          content: 'add navigation underneath modal bar + need a way to apply it from children element'
+        },
+        {
+          title: 'upgrade to sveltekit 2.0',
+          content: 'be sure to updated to latest 1.0 version, then use command to update to 2.'
+        },
+        {
+          title: 'restructure file system',
+          content: 'fix file system for "desktop" icons',
+        },
       ],
       progress: [],
       done: [],
@@ -183,29 +195,40 @@ export const contacts: ContactType[] = [
 /* projects */
 export const projectsOverview: ProjectOverviewType[] = [
   {
-    link: 'https://genuino.world/',
-    title: 'Genuino',
-    type: 'work',
-    tag: ['app', 'website', 'iot'],
-    image: '/images/projects/genuino.jpg',
-    description: `digital collection of NFTs connected with real world objects. worked on react native app & react frontend website.
-    the app interfaces with NFC tags embedded into the sold objects.`
-  },
-  {
-    link: 'https://waterkaarten.app/',
-    title: 'Waterkaarten',
-    type: 'work',
-    tag: ['app'],
-    image: '/images/projects/waterkaarten.jpg',
-    description: `maps for water in the netherlands, germany, UK, and other EU countries. 
-    worked on native ios and android apps, improving UI and features.`
-  },
-  {
-    link: 'https://o9solutions.com/',
-    title: 'o9Solutions',
-    type: 'work',
-    tag: ['website'],
-    image: '/images/projects/o9solutions.png',
-    description: `software for supply chain management. worked on the marketing website with react.`
+    folderGroup: 'PAST WORK',
+    items: [
+      {
+        id: 'genuino',
+        link: 'https://genuino.world/',
+        path: '/projects/genuino',
+        title: 'Genuino',
+        type: 'work',
+        tag: ['app', 'website', 'iot'],
+        image: '/images/projects/genuino.jpg',
+        description: `digital collection of NFTs connected with real world objects. worked on react native app & react frontend website.
+        the app interfaces with NFC tags embedded into the sold objects.`
+      },
+      {
+        id: 'waterkaarten',
+        link: 'https://waterkaarten.app/',
+        title: 'Waterkaarten',
+        path: '/projects/waterkaarten',
+        type: 'work',
+        tag: ['app'],
+        image: '/images/projects/waterkaarten.jpg',
+        description: `maps for water in the netherlands, germany, UK, and other EU countries. 
+        worked on native ios and android apps, improving UI and features.`
+      },
+      {
+        id: 'o9solutions',
+        link: 'https://o9solutions.com/',
+        title: 'o9Solutions',
+        path: '/projects/o9solutions',
+        type: 'work',
+        tag: ['website'],
+        image: '/images/projects/o9solutions.png',
+        description: `software for supply chain management. worked on the marketing website with react.`
+      },
+    ],
   },
 ]

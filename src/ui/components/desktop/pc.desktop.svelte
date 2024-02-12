@@ -18,6 +18,7 @@
   export let openModal: boolean = false
   export let gridRow: string = 'auto'
   export let gridColumn: string = 'auto'
+  export let homePath: string
   /* state */
   let visible: boolean = false
   /* dispatchers */
@@ -67,6 +68,7 @@
     right={modalRight}
     bottom={modalBottom}
     text={text}
+    homePath={homePath}
   >
     <slot />
   </ResizableModal>

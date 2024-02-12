@@ -53,6 +53,7 @@
 <PCDesktop
   uniqueId={1}
   text="settings.sh"
+  homePath="/settings"
   mainColor="#312454"
   modalWidth="750px"
   modalHeight="600px"

@@ -49,6 +49,7 @@
   openModal={openModal}
   on:open={onOpen}
   on:close={onClose}
+  homePath="/blog"
 >
 
 </FolderDesktop>
