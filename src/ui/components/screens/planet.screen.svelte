@@ -1,3 +1,6 @@
+<!--
+  * TODO: update with custom art
+-->
 <!-- script -->
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte'

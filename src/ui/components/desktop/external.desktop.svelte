@@ -68,8 +68,10 @@
 <style>
   .desktop-item {
     /* size */
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 125px;
+    max-height: 125px;
+    width: 125px;
+    height: 125px;
     aspect-ratio: 1 / 1;
     /* flex */
     display: flex;
@@ -102,6 +104,12 @@
     color: var(--color-black);
     /* select */
     user-select: none;
+    /* size */
+    text-overflow: ellipsis;
+    width: 112px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .external-container {
     /* position */
@@ -148,21 +156,5 @@
     z-index: 1;
     /* color */
     fill: var(--color-neon-violet);
-  }
-  /* desktop */
-  @media only screen and (min-width: 1280px) {
-    .desktop-item {
-      /* size */
-      max-width: 84px;
-      max-height: 84px;
-    }
-  }
-  /* large desktop */
-  @media only screen and (min-width: 1920px) {
-    .desktop-item {
-      /* size */
-      max-width: 100px;
-      max-height: 100px;
-    }
   }
 </style>

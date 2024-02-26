@@ -9,7 +9,7 @@
   /* ui imports */
   import QuitButton from '../components/buttons/quit.button.svelte'
   import ScreenSaverButton from '../components/buttons/saver.button.svelte'
-  import PCDesktop from '../components/desktop/pc.desktop.svelte'
+  import DesktopButton from '../components/buttons/desktop.button.svelte'
   import ThemeSelector from '../components/selectors/theme.selector.svelte'
   import ScreenSelector from '../components/selectors/screen.selector.svelte'
   import IconSlider from '../components/sliders/icon.slider.svelte'
@@ -50,7 +50,8 @@
 </script>
 
 <!-- template -->
-<PCDesktop
+<DesktopButton
+  type="pc"
   uniqueId={1}
   text="settings.sh"
   homePath="/settings"
@@ -97,7 +98,7 @@
       </div>
     </div>
   </div>
-</PCDesktop>
+</DesktopButton>
 
 <!-- style -->
 <style>

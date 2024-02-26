@@ -7,7 +7,7 @@
   /* stores imports */
   import { modalFocused } from '../../stores/modals.store'
   /* ui imports */
-  import FolderDesktop from '../components/desktop/folder.desktop.svelte'
+  import DesktopButton from '../components/buttons/desktop.button.svelte'
 
   /* constants */
   let openModal: boolean = false /* todo svelte 5 change to reactive */
@@ -38,7 +38,8 @@
 </script>
 
 <!-- template -->
-<FolderDesktop
+<DesktopButton
+  type="folder"
   uniqueId={6}
   text="blog.dir"
   mainColor="#312454"
@@ -52,9 +53,4 @@
   homePath="/blog"
 >
 
-</FolderDesktop>
-
-<!-- style -->
-<style>
-
-</style>
+</DesktopButton>

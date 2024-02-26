@@ -10,7 +10,7 @@
   import type { LogSettingsType } from '../../types/common'
   import { logs, dropdownLogs, currentVersion } from '../../support/data'
   /* ui imports */
-  import NotepadDesktop from '../components/desktop/notepad.desktop.svelte'
+  import DesktopButton from '../components/buttons/desktop.button.svelte'
   import Selector from '../atoms/selector.svelte'
   import Button from '../atoms/button.svelte'
 
@@ -55,7 +55,8 @@
 </script>
 
 <!-- template -->
-<NotepadDesktop
+<DesktopButton
+  type="text"
   uniqueId={2}
   text="changelog.md"
   mainColor="#0F2F5F"
@@ -141,7 +142,7 @@
       </div>
     </div>
   </div>
-</NotepadDesktop>
+</DesktopButton>
 
 <!-- style -->
 <style>
@@ -307,7 +308,8 @@
     z-index: 6;
     transform: rotate(10deg);
     /* border */
-    border: 3px solid var(--color-highlight);
+    border: 1px solid var(--color-highlight);
+    border-bottom-width: 3px;
     /* font */
     font-size: 88px;
     text-shadow: 1px 1px var(--color-neon-blue), -1px -1px var(--color-neon-violet), -1px 0px var(--color-neon-yellow);

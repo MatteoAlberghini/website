@@ -16,7 +16,7 @@ export type WindowPathType = {
   path: string,
 }
 /* icons */
-export type PossibleIconType = 'txt' | 'tool' | 'folder'
+export type PossibleIconType = 'text' | 'pc' | 'folder' | 'mail' | 'music' | 'external'
 /* theme  */
 export type PossibleThemeType = 'violet' | 'yellow' | 'light'
 export type PossibleThemeData = { text: string, value: PossibleThemeType }
@@ -87,7 +87,7 @@ export type ContactType = {
   }[]
 } 
 /* projects */
-export type ProjectContentType = 'genuino' | 'waterkaarten' | 'o9solutions'
+export type ProjectContentType = 'genuino' | 'waterkaarten' | 'o9solutions' | 'redirect'
 export type ProjectOverviewType = {
   folderGroup: string,
   items: {
@@ -95,9 +95,5 @@ export type ProjectOverviewType = {
     link: string,
     path: string,
     title: string,
-    description: string,
-    image: string,
-    type: 'work' | 'personal',
-    tag: ('website' | 'app' | 'iot' | 'script')[],
   }[],
 }

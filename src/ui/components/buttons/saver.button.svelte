@@ -1,15 +1,19 @@
 <!-- script -->
-<script>
+<script lang="ts">
   /* imports */
   import { isScreenPlaying } from '../../../stores/screen.store'
   import Button from '../../atoms/button.svelte'
+
+  /* props */
+  export let height: number = 40
+  export let width: string = '46px'
 
   /* functions */
   function onClick() { isScreenPlaying.set(true) }
 </script>
 
 <!-- template -->
-<Button on:click={onClick}>
+<Button height={height} width={width} on:click={onClick}>
   <svg
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
@@ -59,42 +63,6 @@
 
 <!-- style -->
 <style>
-  button {
-    /* size */
-    width: 46px;
-    height: 40px;
-    /* color */
-    background-color: var(--color-highlight);
-    background-image: url(/bg-texture.png);
-    /* display */
-    display: flex;
-  }
-  span {
-    /* size */
-    width: 100%;
-    height: 39px;
-    /* position */
-    position: relative;
-    /* flex */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* color */
-    background-color: var(--color-background);
-    border: 2px solid var(--color-highlight);
-    background-image: url(/bg-texture.png);
-    /* animation */
-    transform: translateY(-3px);
-    transition: transform 185ms ease-out;
-  }
-  button:hover > span {
-    /* animation */
-    transform: translateY(-2px);
-  }
-  button:active > span {
-    /* animation */
-    transform: translateY(0px);
-  }
   svg {
     /* size */
     width: 29px;

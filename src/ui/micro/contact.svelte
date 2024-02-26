@@ -12,7 +12,7 @@
   import type { ContactType } from '../../types/common'
   import { postRequest, type DefaultResponseType } from '../../managers/rest.manager'
   /* ui imports */
-  import ContactDesktop from '../components/desktop/contact.desktop.svelte'
+  import DesktopButton from '../components/buttons/desktop.button.svelte'
   import Selector from '../atoms/selector.svelte'
   import Input from '../atoms/input.svelte'
   import Textarea from '../atoms/textarea.svelte'
@@ -78,7 +78,8 @@
 </script>
 
 <!-- template -->
-<ContactDesktop
+<DesktopButton
+  type="mail"
   uniqueId={5}
   text="contact.sh"
   mainColor="#2B4162"
@@ -136,7 +137,7 @@
       </div>
     </form>
   </div>
-</ContactDesktop>
+</DesktopButton>
 
 <!-- style -->
 <style>

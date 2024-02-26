@@ -1,3 +1,6 @@
+<!--
+  * TODO: its made pretty much just for the projects folder, maybe can make it general?
+-->
 <!-- script -->
 <script lang="ts">
   /* typescript */
@@ -45,19 +48,18 @@ on:mouseleave={onMouseLeave}
 
 <!-- style -->
 <style>
-    .container {
+  .container {
     /* size */
     max-width: 100px;
     max-height: 100px;
+    width: 100px;
+    height: 100px;
     aspect-ratio: 1 / 1;
     /* flex */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* margins */
-    padding-left: 16px;
-    padding-right: 16px;
     /* color */
     background-color: transparent;
   }
@@ -70,12 +72,23 @@ on:mouseleave={onMouseLeave}
   }
   .text {
     /* text */
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 400;
     text-shadow: 1px 1px var(--color-neon-blue), -1px -1px var(--color-neon-violet), -1px 0px var(--color-neon-yellow);
     /* color */
     color: var(--color-highlight);
     /* select */
     user-select: none;
+    /* size */
+    text-overflow: ellipsis;
+    width: 92px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  svg {
+    /* size */
+    min-height: 67px;
+    min-width: 67px;
   }
 </style>

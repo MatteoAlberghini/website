@@ -202,33 +202,49 @@ export const projectsOverview: ProjectOverviewType[] = [
         link: 'https://genuino.world/',
         path: '/projects/genuino',
         title: 'Genuino',
-        type: 'work',
-        tag: ['app', 'website', 'iot'],
-        image: '/images/projects/genuino.jpg',
-        description: `digital collection of NFTs connected with real world objects. worked on react native app & react frontend website.
-        the app interfaces with NFC tags embedded into the sold objects.`
       },
       {
         id: 'waterkaarten',
         link: 'https://waterkaarten.app/',
         title: 'Waterkaarten',
         path: '/projects/waterkaarten',
-        type: 'work',
-        tag: ['app'],
-        image: '/images/projects/waterkaarten.jpg',
-        description: `maps for water in the netherlands, germany, UK, and other EU countries. 
-        worked on native ios and android apps, improving UI and features.`
       },
       {
         id: 'o9solutions',
         link: 'https://o9solutions.com/',
         title: 'o9Solutions',
         path: '/projects/o9solutions',
-        type: 'work',
-        tag: ['website'],
-        image: '/images/projects/o9solutions.png',
-        description: `software for supply chain management. worked on the marketing website with react.`
       },
     ],
   },
+  {
+    folderGroup: 'REPOSITORIES',
+    items: [
+      {
+        id: 'redirect',
+        link: 'https://github.com/MatteoAlberghini/website',
+        title: 'website',
+        path: '/projects/website',
+      },
+      {
+        id: 'redirect',
+        link: 'https://github.com/MatteoAlberghini/geonames.scripts',
+        title: 'geonames scripts',
+        path: '/projects/geonames',
+      },
+      {
+        id: 'redirect',
+        link: 'https://github.com/MatteoAlberghini/snippets.es6',
+        title: 'js/ts snippets',
+        path: '/projects/js-snippets',
+      }
+    ]
+  }
+]
+/* top bar */
+export const messages: string[] = [
+  'happy to see you here :)',
+  'enjoy your stay',
+  'check out my <a href="/projects/?t=focus">projects</a> :D',
+  '<a href="/settings/?t=focus">customize</a> your experience!'
 ]
