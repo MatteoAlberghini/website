@@ -1,11 +1,15 @@
 <!-- script -->
-<script>
+<script lang="ts">
   /* imports */
   import Button from '../../atoms/button.svelte'
+
+  /* props */
+  export let height: number = 40
+  export let width: string = '46px'
 </script>
 
 <!-- template -->
-<Button>
+<Button height={height} width={width}>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"

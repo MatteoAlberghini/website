@@ -129,8 +129,8 @@
       /* grid */
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
       grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
-      column-gap: 8px;
-      row-gap: 8px;
+      column-gap: 12px;
+      row-gap: 12px;
       /* padding */
       padding-left: 8px;
       padding-right: 16px;

@@ -1,6 +1,10 @@
+<!--
+  * TODO: delete / update aria roles
+  * TODO: better html structure?
+  * TODO: better comment structure
+-->
 <!-- script -->
 <script lang="ts">
-  /* todo delete the aria roles, how? */
   /* imports */
   import { createEventDispatcher, onMount } from 'svelte'
   import { expoOut } from 'svelte/easing'
@@ -472,7 +476,8 @@
   }
   .modal-title > a {
     /* font */
-    text-shadow: 1px 1px var(--color-neon-blue), -1px -1px var(--color-neon-violet);
+    color: var(--color-black);
+    text-shadow: 1px 0px var(--color-neon-blue), 0px -1px var(--color-neon-violet);
     /* text */
     text-decoration: underline;
   }

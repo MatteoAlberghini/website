@@ -12,7 +12,9 @@
   import Changelog from '../ui/micro/changelog.svelte'
   import Projects from '../ui/micro/projects.svelte'
   import Contact from '../ui/micro/contact.svelte'
-  import Support from '../ui/micro/linkedin.svelte'
+  import Linkedin from '../ui/micro/linkedin.svelte'
+  import Github from '../ui/micro/github.svelte'
+  import Topbar from '../ui/macro/topbar.svelte'
 
   /* functions */
   function onClick() {
@@ -28,11 +30,13 @@
 </svelte:head>
 <main>
   <Desktop>
+    <Topbar />
     <Changelog />
     <Projects />
     <Contact />
-    <Settings gridRow="-2" gridColumn="1" />
-    <Support gridColumn="-2" />
+    <Settings />
+    <Linkedin gridColumn="-2" />
+    <Github gridColumn="-2" />
     <slot />
   </Desktop>
 </main>
@@ -47,7 +51,7 @@
     /* colors theme */
     --color-background: #B682FF;
     --color-highlight: #FFD200;
-    --color-highlight-hover: #FFD20030;
+    --color-highlight-hover: #FFD20040;
     --color-selector: #BF354b;
     /* defaults */
     --color-white: #FFF4E9;
@@ -67,13 +71,12 @@
   [data-theme='violet']:root {
     --color-background: #B682FF;
     --color-highlight: #FFD200;
-    --color-highlight-hover: #FFD20030;
+    --color-highlight-hover: #FFD20040;
   }
   [data-theme='light']:root {
     --color-background: #FFF4E9;
     --color-highlight: #BF354b;
     --color-highlight-hover: #BF354b30;
-    --test: #544c24;
   }
   :global(body) {
     /* size */
@@ -91,6 +94,8 @@
     outline: 0;
     /* position */
     overflow: hidden;
+    /* cursor */
+    cursor: url(/cursor.png) 0 12, pointer;
   }
   :global(*) {
     /* css reset */
@@ -122,6 +127,8 @@
     /* size */
     height: 100vh;
     width: 100vw;
+    min-height: 100vh;
+    min-width: 100vh;
     /* color */
     background-color: var(--color-background);
   }

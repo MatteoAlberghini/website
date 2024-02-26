@@ -9,19 +9,20 @@
     <h2>GENUINO.WORLD</h2>
     <div class="info-container">
       <div class="tags-container">
-        <span>&lt; app /&gt;</span>
-        <span>&lt; website /&gt;</span>
+        <span>&lt; react native app /&gt;</span>
+        <span>&lt; react website /&gt;</span>
         <span>&lt; iot /&gt;</span>
       </div>
       <a
         href="https://www.genuino.world/"
         target="_blank"
       >
-        project website  
+        genuino website  
       </a>
     </div>
   </div>
   <div class="content">
+    <p class="intro-text">Feel free to <a href="/contacts">contact me</a> if you have any questions or you want to reach out :)</p>
     <h3>Company details</h3>
     <p>
       Genuino is a company dedicated to connect digital collectibles with real world objects,
@@ -42,26 +43,50 @@
       In the backend, the tag is then connected and saved in the database, and at the same time a Token is minted
       on the ethereum blockchain.
       <br />
-      The user can then purchase the token, and with that the real world product, and Genuino will ensure both a marketplace
+      The user can then purchase the token, connected to the real world product, and Genuino will ensure both a marketplace
       for it, and that the product is delivered and always connected with the digital token.
       <br />
-      The <a href="https://www.genuino.world/">website</a> is then the marketplace face and the way to obtain
+      The <a href="https://www.genuino.world/">website</a> is the marketplace and the way to obtain
       different tokens, both via purchasing the token itself and by purchasing gamify version of card packs.
     </p>
-    <h3>TLDR tech stack</h3>
+    <h3>tech stack && favorite animations</h3>
     <ul>
       <li>Next.js for website frontend</li>
       <li>React Native (with custom native hooks) for mobile app</li>
       <li>Custom made NFC tags that interface with in-house low-level auth system via app</li>
     </ul>
-    <h3>Favorite code && animations</h3>
-    <video
-      src="/videos/glitch_genuino.mp4"
-      class="contained-media"
-      muted
-      autoplay
-      loop
-    />
+    <div class="animations-container">
+      <div class="animation-container">
+        <video
+          src="/videos/glitch_genuino.mp4"
+          class="contained-media"
+          muted
+          autoplay
+          loop
+        />
+        <p>CSS-only glitch animation</p>
+      </div>
+      <div class="animation-container">
+        <p>Play video on cursor hover</p>
+        <video
+          src="/videos/hover_card_genuino.mp4"
+          class="contained-media"
+          muted
+          autoplay
+          loop
+        />
+      </div>
+      <div class="animation-container">
+        <p>Custom carousel in javascript</p>
+        <video
+          src="/videos/carousel_genuino.mp4"
+          class="contained-media"
+          muted
+          autoplay
+          loop
+        />
+      </div>
+    </div>
   </div>
 </div>
 
@@ -126,12 +151,57 @@
     /* margins */
     margin-top: 4px;
   }
+  .animations-container {
+    /* flex */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* size */
+    width: 100%;
+    /* margins */
+    column-gap: 24px;
+    row-gap: 24px;
+    margin-top: 24px;
+  }
+  .animation-container {
+    /* flex */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-shrink: 0;
+    /* position */
+    position: relative;
+    /* size */
+    max-width: 450px;
+    width: 100%;
+  }
+  .animation-container > p {
+    /* position */
+    position: absolute;
+    top: -16px;
+    /* border */
+    border: 1px solid var(--color-highlight);
+    border-bottom-width: 3px;
+    /* font */
+    font-size: 16px;
+    text-shadow: 1px 1px var(--color-neon-blue), 0px -1px var(--color-neon-violet), -1px 0px var(--color-neon-yellow);
+    text-transform: uppercase;
+    /* color */
+    color: var(--color-highlight);
+    background-color: #312454;
+    /* margins */
+    padding-left: 14px;
+    padding-right: 16px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+  }
   /* intro */
   .intro-image {
     /* size */
     width: 100%;
-    max-width: 680px;
-    height: 320px;
+    height: 350px;
     object-fit: cover;
     /* flex */
     justify-self: flex-start;
@@ -149,7 +219,7 @@
   }
   .tags-container > span {
     /* fonts */
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     /* color */
     color: var(--color-highlight);
@@ -157,7 +227,7 @@
   }
   .info-container > a {
     /* fonts */
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     /* color */
     color: var(--color-highlight);
@@ -168,6 +238,10 @@
     text-decoration: none;
   }
   /* content */
+  .intro-text {
+    /* margins */
+    margin-top: 8px;
+  }
   .content > h3 {
     /* font */
     font-size: 20px;
@@ -202,7 +276,5 @@
     /* border */
     border: 1px solid var(--color-highlight);
     border-bottom-width: 3px;
-    /* margins */
-    margin-top: 12px;
   }
 </style>

@@ -11,8 +11,9 @@
   /* data */
   import { projectsOverview } from '../../support/data'
   /* ui imports */
-  import FolderDesktop from '../components/desktop/folder.desktop.svelte'
+  import DesktopButton from '../components/buttons/desktop.button.svelte'
   import FolderButton from '../components/buttons/folder.button.svelte'
+  import FolderButtonRedirect from '../components/buttons/folder.button.redirect.svelte'
   import Genuino from './genuino.svelte'
   import Waterkaarten from './waterkaarten.svelte'
   import O9Solutions from './o9solutions.svelte'
@@ -73,13 +74,14 @@
 </script>
 
 <!-- template -->
-<FolderDesktop
+<DesktopButton
+  type="folder"
   uniqueId={3}
   text="projects.dir"
   homePath="/projects"
   path={windowPaths}
   mainColor="#312454"
-  modalWidth="980px"
+  modalWidth="1000px"
   modalHeight="750px"
   modalTop="20%"
   modalLeft="30%"
@@ -94,12 +96,19 @@
     <div class="folders-wrapper">
       <span class="folders-title">{p.folderGroup}</span>
       {#each p.items as i}
+        {#if i.id === 'redirect'}
+        <FolderButtonRedirect
+          title={i.title}
+          link={i.link}
+        />
+        {:else}
         <FolderButton
           id={i.id}
           title={i.title}
           path={i.path}
           on:click={handleFolderClick}
         />
+        {/if}
       {/each}
     </div>
     {/each}
@@ -114,7 +123,7 @@
       {/if}
     {/if}
   </div>
-</FolderDesktop>
+</DesktopButton>
 
 <!-- style -->
 <style>

@@ -4,7 +4,7 @@
   import { page } from '$app/stores'
   import { goto } from '$app/navigation'
   /* ui imports */
-  import MusicDesktop from '../components/desktop/music.desktop.svelte'
+  import DesktopButton from '../components/buttons/desktop.button.svelte'
 
   /* props */
   export let gridRow: string = 'auto'
@@ -20,7 +20,8 @@
 </script>
 
 <!-- template -->
-<MusicDesktop
+<DesktopButton
+  type="music"
   uniqueId={4}
   text="music.sh"
   mainColor="#312454"
@@ -36,7 +37,7 @@
   homePath="/music"
 >
 
-</MusicDesktop>
+</DesktopButton>
 
 <!-- style -->
 <style>
